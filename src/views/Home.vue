@@ -2,7 +2,6 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Hey mafacka, i deployed" />
-    <div :style="{ backgroundImage: `../assets/145290-OTJO7F-910.jpg` }"></div>
   </div>
 </template>
 
