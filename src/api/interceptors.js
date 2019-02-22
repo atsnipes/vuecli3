@@ -1,15 +1,10 @@
-import router from '@router/index'
-import store from '@state/store'
-import {
-  isAuthorizedForApiRequest
-} from '@utils/oidc'
+import router from '../router'
+
 
 const authorizationHeaderInterceptor = config => {
   // Use oidc-store to check token and auth flags...
-  if (isAuthorizedForApiRequest(store)) {
-    config.headers.Authorization = `Bearer ${store.getters.oidcAccessToken}`
-  }
-  return config
+  console.log(`requesting = ${JSON.stringify(config)}`)
+  return config;
 }
 
 const unauthorizedInterceptor = {
@@ -17,19 +12,6 @@ const unauthorizedInterceptor = {
   // TODO DINT-673: need to handle axios' 500 malformed response object in DINT-673
   rejected: error => {
     console.log(`Response Interceptor error: ${error}`)
-    if(error.response.status === 404){
-      router.push({
-        name: '404'
-      })
-    }
-    else {
-      router.push({
-        name: 'error',
-        params: {
-          errorInfo: error
-        }
-      })
-    }
     return Promise.reject(error)
   },
 }

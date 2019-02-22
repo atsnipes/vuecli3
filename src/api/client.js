@@ -1,5 +1,5 @@
 import * as axiosClient from 'axios'
-import interceptors from '@api/interceptors'
+import interceptors from './interceptors'
 
 interceptors.request.forEach(interceptor => {
   axiosClient.interceptors.request.use(interceptor)

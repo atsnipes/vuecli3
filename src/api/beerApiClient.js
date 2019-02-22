@@ -2,9 +2,9 @@
  * Provides an interface for IntelligenceOIDC API actions
  */
 import axios from "./client";
-import {
-  ENV
-} from "../config/env";
+// import {
+//   ENV
+// } from "../config/ENV";
 
 export default {
   /**
@@ -26,9 +26,9 @@ export default {
    * @param {string} endpoint - The beer api endpt
    * @returns {string | null} ????
    */
-  callBeerApi(endpoint) {
+  getBreweriesByState(stateAbbrev) {
     return axios.get(
-      `${ENV.beerApi.baseUrl}/${endpoint}/?key=${ENV.beerApi.apiKey}`
+      `https://api.openbrewerydb.org/breweries?by_state=${stateAbbrev}`
     );
   }
 };

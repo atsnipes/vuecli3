@@ -3,7 +3,7 @@
  */
 export const ENV = {
     beerApi: {
-        url: "http://api.brewerydb.com/v2/",
-        apiKey: ""
+        url: "https://sandbox-api.brewerydb.com/v2/",
+        apiKey: "7b4b55a4859f7e0df99a57861700e6b6"
     }
 };
