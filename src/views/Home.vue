@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="../assets/logo.png" />
     <StateAbbreviator></StateAbbreviator>
-    <HelloWorld msg="Hey mafacka, i deployed"/>
+    <HelloWorld msg="Hey mafacka, i deployed" />
   </div>
 </template>
 
@@ -10,20 +10,12 @@
 // @ is an alias to /src
 import HelloWorld from "../components/HelloWorld.vue";
 import StateAbbreviator from "../components/StateAbbreviator.vue";
-import BeerApiClient from "../api/beerApiClient.js";
 
 export default {
   name: "home",
   components: {
     HelloWorld,
     StateAbbreviator
-  },
-  props: {
-    beerPrice: String
-  },
-  async mounted() {
-    const result = await BeerApiClient.getBreweriesByState("North Carolina");
-    console.log(result);
   }
 };
 </script>

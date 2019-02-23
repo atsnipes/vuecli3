@@ -2,78 +2,82 @@
 import router from '@router/index'
 import state from '@state/store'
 /* eslint-enable */
-import * as utils from '@utils/oidc'
+import * as utils from "@utils/oidc";
 
-import interceptors from '@api/interceptors'
+import interceptors from "@api/interceptors";
 
-describe('@api/Interceptors', () => {
+describe("@api/Interceptors", () => {
   const testConfig = {
-    headers: {},
-  }
+    headers: {}
+  };
   beforeEach(() => {
-    jest.mock('@router/index')
-    jest.mock('@state/store')
-    jest.mock('@utils/oidc')
-  })
+    jest.mock("@router/index");
+    jest.mock("@state/store");
+    jest.mock("@utils/oidc");
+  });
 
-  describe('authorizationHeaderInterceptor method', () => {
-    it('should set authorization header when user is authorized for request', () => {
+  describe("authorizationHeaderInterceptor method", () => {
+    it("should set authorization header when user is authorized for request", () => {
       // arrange
-      utils.isAuthorizedForApiRequest = jest.fn().mockReturnValueOnce(true)
+      utils.isAuthorizedForApiRequest = jest.fn().mockReturnValueOnce(true);
 
       // act
-      const request = interceptors.request[0](testConfig)
+      const request = interceptors.request[0](testConfig);
 
       // assert
-      expect(request.headers.Authorization).not.toBe(null)
-      expect(request.headers.Authorization).toContain('Bearer')
-    })
+      expect(request.headers.Authorization).not.toBe(null);
+      expect(request.headers.Authorization).toContain("Bearer");
+    });
 
-    it('should not set authorization header when user not authorized for request', () => {
+    it("should not set authorization header when user not authorized for request", () => {
       // arrange
-      testConfig.headers = {}
-      utils.isAuthorizedForApiRequest.mockReturnValueOnce(false)
+      testConfig.headers = {};
+      utils.isAuthorizedForApiRequest.mockReturnValueOnce(false);
 
       // act
-      const request = interceptors.request[0](testConfig)
+      const request = interceptors.request[0](testConfig);
 
       // assert
-      expect(request.headers).toBe(testConfig.headers)
-      expect(request.headers.Authorization).toBe(undefined)
-    })
-  })
+      expect(request.headers).toBe(testConfig.headers);
+      expect(request.headers.Authorization).toBe(undefined);
+    });
+  });
 
-  describe('unauthorizedInterceptor method', () => {
-    describe('fulfilled scenario', () => {
-      it('should return response', () => {
+  describe("unauthorizedInterceptor method", () => {
+    describe("fulfilled scenario", () => {
+      it("should return response", () => {
         // arrange
         const testResponse = {
-          some: 'response',
-        }
+          some: "response"
+        };
 
         // act
-        const fulfilledResponse = interceptors.response[0].fulfilled(testResponse)
+        const fulfilledResponse = interceptors.response[0].fulfilled(
+          testResponse
+        );
 
         // assert
-        expect(fulfilledResponse).toBe(testResponse)
-      })
-    })
+        expect(fulfilledResponse).toBe(testResponse);
+      });
+    });
 
-    describe('rejected scenario', () => {
-      it('should push error to rejected promise when 500', () => {
+    describe("rejected scenario", () => {
+      it("should push error to rejected promise when 500", () => {
         // arrange
         const testError = {
           response: {
-            message: 'some Error because: badness.',
+            message: "some Error because: badness.",
             status: 500
           }
-        }
+        };
         // act
-        const rejectedResponsePromise = interceptors.response[0].rejected(testError)
+        const rejectedResponsePromise = interceptors.response[0].rejected(
+          testError
+        );
 
         // assert
-        expect(rejectedResponsePromise).rejects.toThrow(testError)
-      })
-    })
-  })
-})
+        expect(rejectedResponsePromise).rejects.toThrow(testError);
+      });
+    });
+  });
+});

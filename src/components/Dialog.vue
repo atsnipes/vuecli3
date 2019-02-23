@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="dialog">
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,
@@ -8,6 +8,9 @@
         >vue-cli documentation</a
       >.
     </p>
+    <h3>
+      <a href="#">Buy</a>
+    </h3>
     <h3>Installed CLI Plugins</h3>
     <ul>
       <li>
@@ -118,5 +121,7 @@ li {
 }
 a {
   color: #42b983;
+  font-family: helvetica;
+  text-decoration: none;
 }
 </style>
