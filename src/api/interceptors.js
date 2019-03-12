@@ -1,8 +1,13 @@
-import router from "../router";
+import store from "../store";
 
 const authorizationHeaderInterceptor = config => {
   // Use oidc-store to check token and auth flags...
   console.log(`requesting = ${JSON.stringify(config)}`);
+  // Use oidc-store to check token and auth flags...
+  if (store.getters.artsyAccessToken) {
+    //config.headers.Authorization = `Bearer ${store.getters.oidcAccessToken}`
+    config.headers.Authorization = `Bearer: ${store.getters.artsyAccessToken}`;
+  }
   return config;
 };
 

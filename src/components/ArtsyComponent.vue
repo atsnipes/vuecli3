@@ -15,10 +15,12 @@ export default {
     state: String,
     response: String
   },
-  mounted() {
+  async mounted() {
     console.log("mounting...");
     const artsyClient = new ArtsyClient();
-    console.log(`artsyClient created = ${artsyClient}`);
+    const result = await artsyClient.artsySetToken();
+    const resulta = await artsyClient.getByPost("andy-warhol");
+    console.log(`result a = ${JSON.stringify(resulta)}`)
   }
 };
 </script>
